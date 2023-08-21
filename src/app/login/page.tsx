@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import classNames from "classnames";
 
 
 export default function Page() {
@@ -33,9 +34,8 @@ export default function Page() {
     return (
         <form onSubmit={formSubmit} className="card transition">
             <span className="text-2xl font-medium mx-auto mb-8">Login</span>
-            {
-                error ? <span className="text-sm text-red-400"><b>Sign in failed:</b> {error}</span> : ""
-            }
+            <span className={classNames("text-sm text-red-400 transition-all", {"opacity-0 h-0": !error})}><b>Sign in failed:</b> {error}</span>
+            
 
             <div className="flex flex-col gap-2">
                 <span className="text-sm">Username</span>
