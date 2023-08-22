@@ -5,6 +5,7 @@ import ActiveLink from '@/components/activeLink'
 import './globals.css'
 import './styles.scss'
 import Link from 'next/link'
+import AccountSection from '@/components/accountSection'
 
 
 const mainFont = MainFont({ subsets: ['latin'] })
@@ -26,8 +27,8 @@ export default function RootLayout({
 						<h1 className="text-3xl font-bold">Imshare</h1>
 						<h5 className="text-sm text-gray-500">Temporary file sharing service</h5>
 					</div>
-					<div className="ml-auto flex items-center">
-						
+					<div className="ml-auto flex items-center gap-8">
+						<AccountSection />
 					</div>
 				</header>
 				<nav className="flex p-[2px] bg-zinc-900 rounded-2xl mx-auto w-max gap-2">

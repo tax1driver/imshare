@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import classNames from "classnames";
 
 
+
 export default function Page() {
     const [error, setError] = useState(null);
+    const router = useRouter();
 
     const formSubmit = (e: any) => {
         e.preventDefault();
@@ -18,15 +20,16 @@ export default function Page() {
         }
         
         signIn("credentials", {
-            username: e.target.username,
-            password: e.target.password,
+            username: e.target["username"].value,
+            password: e.target["password"].value,
             twofactorAuth: "",
             redirect: false
         }).then(result => {
             if (result.error) {
                 setError(result.error);
             } else {
-                redirect("/");
+                router.push("/");
+                router.refresh();
             }
         });
     }

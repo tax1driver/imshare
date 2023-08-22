@@ -1,6 +1,6 @@
 export interface APIResponse {
     success: boolean,
-    errorMessage?: string
+    errorMessage?: string | any
 };
 
 export interface UploadAPIResponse extends APIResponse {

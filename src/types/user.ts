@@ -12,5 +12,6 @@ export interface InternalUser extends ClientUser {
 export interface CreateUserOptions extends Record<string, string> {
     username: string,
     password: string,
+    passwordRepeat: string,
     email: string
 }

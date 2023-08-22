@@ -46,6 +46,10 @@ class StringValidator {
         return this;
     }
 
+    public matchesString(str: string) {
+        return this.expect(str === this._target, "does not match constraint");
+    }
+
     public email() {
         const re =
             /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -60,11 +64,11 @@ class StringValidator {
     }
 
     public min(i: number) {
-        return this.expect(this._target.length > i, `too short (min ${i} characters, got ${this._target.length})`);
+        return this.expect(this._target.length >= i, `too short (min ${i} characters, got ${this._target.length})`);
     }
 
     public max(i: number) {
-        return this.expect(this._target.length < i, `too long (max ${i} characters, got ${this._target.length})`);
+        return this.expect(this._target.length <= i, `too long (max ${i} characters, got ${this._target.length})`);
     }
 }
 
