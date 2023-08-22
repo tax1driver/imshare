@@ -6,6 +6,7 @@ import { prisma } from "@/db";
 
 import bcrypt from "bcrypt"
 import { Prisma } from "@prisma/client";
+import { InternalUser } from "@/types/user";
 
 interface Credentials extends Record<string, string> {
     username: string, 
@@ -23,7 +24,7 @@ const nextAuth = NextAuth({
                 twofactorAuth: {label: 'Two-factor authentication', type: 'text'}
             },
             async authorize(credentials: Credentials, req) {
-                const user = await prisma.user.findUnique({
+                const user: InternalUser = await prisma.user.findUnique({
                     where: {
                         username: credentials.username
                     }
@@ -42,8 +43,7 @@ const nextAuth = NextAuth({
     pages: {
         signIn: "/login",
         signOut: "/logout",
-        error: "/error",
-        verifyRequest: "/verify",
+        error: "/error"
     }
 });
 

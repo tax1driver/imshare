@@ -27,7 +27,7 @@ export default function RootLayout({
 						<h5 className="text-sm text-gray-500">Temporary file sharing service</h5>
 					</div>
 					<div className="ml-auto flex items-center">
-						<ActiveLink href="/login" className="btn transition" activeClassName="invisible">Log in</ActiveLink>
+						
 					</div>
 				</header>
 				<nav className="flex p-[2px] bg-zinc-900 rounded-2xl mx-auto w-max gap-2">
