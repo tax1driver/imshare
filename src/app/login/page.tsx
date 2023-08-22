@@ -5,12 +5,15 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import classNames from "classnames";
+import useAuthRedirect from "@/globals/useAuthRedirect";
 
 
 
 export default function Page() {
     const [error, setError] = useState(null);
     const router = useRouter();
+
+    
 
     const formSubmit = (e: any) => {
         e.preventDefault();

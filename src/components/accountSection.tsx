@@ -5,12 +5,12 @@ import LogoutButton from "./logoutButton";
 
 export default async function AccountSection() {
     const session = await getServerSession(authOptions);
-    
+
     if (session) {
         return (
             <>
                 <span className="text-sm text-slate-200">
-                    Logged in as <b></b>
+                    Hello, <b>{session.user.username}</b>
                 </span>
                 <LogoutButton />
             </>

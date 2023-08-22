@@ -23,7 +23,6 @@ export default function Page() {
 
         createUser(userOptions)
         .then(response => {
-            console.log(response)
             if (!response.success) {
                 setErrors(response.errorMessage);
             } else {

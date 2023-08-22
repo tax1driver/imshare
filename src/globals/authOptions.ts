@@ -1,11 +1,13 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 
-import { User } from "next-auth"
+import { Account, AuthOptions, Session, User } from "next-auth"
 import { prisma } from "@/db";
 
 import bcrypt from "bcrypt"
 import { Prisma } from "@prisma/client";
-import { InternalUser } from "@/types/user";
+import { ClientUser, InternalUser } from "@/types/user";
+import NextAuth from "next-auth/next";
+import { JWT } from "next-auth/jwt";
 
 export interface Credentials extends Record<string, string> {
     username: string,
@@ -14,7 +16,7 @@ export interface Credentials extends Record<string, string> {
 }
 
 
-const authOptions = {
+const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
             name: 'Credentials',
@@ -23,20 +25,25 @@ const authOptions = {
                 password: { label: 'Password', type: 'password' },
                 twofactorAuth: { label: 'Two-factor authentication', type: 'text' }
             },
-            async authorize(credentials: Credentials, req) {
+            async authorize(credentials: Credentials, req): Promise<ClientUser> {
                 const user: InternalUser = await prisma.user.findUnique({
                     where: {
                         username: credentials.username
                     }
                 })
 
-                if (!user) return Promise.reject(new Error("Invalid username"));
+                if (!user) throw new Error("Invalid username");
 
                 const correctPassword = await bcrypt.compare(credentials.password, user.passwordHash);
 
                 if (correctPassword) {
-                    return user;
-                } else return Promise.reject(new Error("Invalid password"));;
+                    //console.log(user)
+                    return {
+                        username: user.username,
+                        dateJoined: user.dateJoined,
+                        id: user.id,
+                    };
+                } else throw new Error("Invalid password");
             }
         })
     ],
@@ -44,6 +51,16 @@ const authOptions = {
         signIn: "/login",
         signOut: "/logout",
         error: "/error",
+    },
+    callbacks: {
+        async session({session, token}) {
+            session.user = token.user;
+            return session;
+        },
+        async jwt({token, user, account}) {
+            if (user) token.user = user;
+            return token;
+        },
     }
 }
 

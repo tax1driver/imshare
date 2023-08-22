@@ -17,4 +17,16 @@ model User {
   email String @unique
   passwordHash String
   dateJoined Int
+  files SharedFile[]
+}
+
+model SharedFile {
+  id  String  @id @default(auto()) @map("_id") @db.ObjectId
+  fullName String
+  size Int
+  fileToken String @unique
+  storageId String @unique
+  timestamp Int
+  uploaderId String @db.ObjectId
+  uploader User @relation(fields: [uploaderId], references: [id])
 }

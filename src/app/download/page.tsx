@@ -15,7 +15,7 @@ export default function Page() {
 
             <div className="flex flex-col gap-2">
                 <span className="text-sm">Password <span className="font-light">(if needed)</span></span>
-                <input type="password" className="input" />
+                <input type="text" className="input" />
             </div>
 
             <span className="text-sm">You can also download files via <b>QR code</b> or <b>link</b> if provided.</span>

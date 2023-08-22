@@ -1,6 +1,8 @@
 'use server';
 
 import { prisma } from "@/db";
+import { getServerSession } from "next-auth/next";
+import authOptions from "@/globals/authOptions";
 import { createHash } from "@/globals/hash";
 import { ObjectStringValidator } from "@/globals/validation";
 import { APIResponse } from "@/types/apiResponse";
@@ -56,4 +58,9 @@ export async function createUser(userOptions: CreateUserOptions): Promise<APIRes
     return {
         success: true
     };
+}
+
+export async function getSession() {
+    const session = await getServerSession(authOptions);
+    return session;
 }

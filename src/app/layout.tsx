@@ -1,11 +1,14 @@
 import type { Metadata } from 'next'
 import { Inter as MainFont } from 'next/font/google'
 import ActiveLink from '@/components/activeLink'
+import { getServerSession } from 'next-auth/next'
 
 import './globals.css'
 import './styles.scss'
 import Link from 'next/link'
 import AccountSection from '@/components/accountSection'
+import authOptions from '@/globals/authOptions'
+import classNames from 'classnames'
 
 
 const mainFont = MainFont({ subsets: ['latin'] })
@@ -14,11 +17,14 @@ export const metadata: Metadata = {
 	title: 'Imshare (nextJS)',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   	children,
 }: {
   	children: React.ReactNode
 }) {
+	const authorized = getServerSession(authOptions);
+	
+
 	return (
 		<html lang="en">
 			<body className={mainFont.className + " min-h-screen"}>
@@ -31,10 +37,10 @@ export default function RootLayout({
 						<AccountSection />
 					</div>
 				</header>
-				<nav className="flex p-[2px] bg-zinc-900 rounded-2xl mx-auto w-max gap-2">
+				<nav className={classNames("flex p-[2px] bg-zinc-900 rounded-2xl mx-auto w-max gap-2" , { "invisible" : !authorized })}>
 					<ActiveLink href="/upload" className="nav-btn" activeClassName="active">Upload</ActiveLink>
 					<ActiveLink href="/download" className="nav-btn" activeClassName="active">Download</ActiveLink>
-					<ActiveLink href="/myfiles" className="nav-btn" activeClassName="active">My files</ActiveLink>
+					<ActiveLink href="/files" className="nav-btn" activeClassName="active">My files</ActiveLink>
 				</nav>
 
 				<main className="flex flex-col justify-center items-center mb-10 mt-20">

@@ -1,6 +1,7 @@
 'use client'
 
 import { MAX_FILE_SIZE } from '@/globals/uploadConstants';
+import useAuthRedirect from '@/globals/useAuthRedirect';
 import { APIResponse, UploadAPIResponse } from '@/types/apiResponse';
 import axios from 'axios';
 import classNames from 'classnames';
@@ -29,6 +30,8 @@ export default function Page() {
     const [uploadError, setUploadError] = useState<any>();
     const [uploadProgress, setUploadProgress] = useState<number>(0);
     
+    useAuthRedirect("/");
+
     const startFileUpload = (file: File | undefined) => {
         if (file == null) return;
         
