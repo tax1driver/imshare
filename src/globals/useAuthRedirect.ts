@@ -2,12 +2,16 @@
 
 import { getSession } from "@/actions/userActions"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export default function useAuthRedirect(to: string) {
     const router = useRouter();
-    getSession().then((session) => {
-        if (!session) {
-            router.push(to);
-        }
-    });
+
+    useEffect(() => {
+        getSession().then((session) => {
+            if (!session) {
+                router.push(to);
+            }
+        });
+    }, []);
 }

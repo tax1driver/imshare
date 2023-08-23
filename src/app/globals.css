@@ -60,6 +60,14 @@ body {
   @apply bg-zinc-800 rounded-md p-1 text-sm px-2
 }
 
+th {
+  @apply px-8 py-2
+}
+
+td {
+  @apply text-center py-1
+}
+
 
 .upload-card label {
   position: absolute;

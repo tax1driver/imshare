@@ -5,8 +5,10 @@ import { getServerSession } from "next-auth/next";
 import authOptions from "@/globals/authOptions";
 import { createHash } from "@/globals/hash";
 import { ObjectStringValidator } from "@/globals/validation";
-import { APIResponse } from "@/types/apiResponse";
+import { APIResponse, GetFilesAPIResponse, apiError } from "@/types/apiResponse";
 import { CreateUserOptions } from "@/types/user";
+import { ClientFile } from "@/types/file";
+import { unstable_cache } from "next/cache";
 
 export async function createUser(userOptions: CreateUserOptions): Promise<APIResponse> {
     const validator = new ObjectStringValidator(userOptions);
@@ -59,6 +61,8 @@ export async function createUser(userOptions: CreateUserOptions): Promise<APIRes
         success: true
     };
 }
+
+
 
 export async function getSession() {
     const session = await getServerSession(authOptions);

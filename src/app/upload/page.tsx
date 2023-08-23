@@ -2,11 +2,12 @@
 
 import { MAX_FILE_SIZE } from '@/globals/uploadConstants';
 import useAuthRedirect from '@/globals/useAuthRedirect';
-import { APIResponse, UploadAPIResponse } from '@/types/apiResponse';
+import { UploadAPIResponse } from '@/types/apiResponse';
 import axios from 'axios';
 import classNames from 'classnames';
-import { redirect } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { useState, useEffect } from 'react';
 
 function Uploading(props: {progress: number}) {
     const progress = props.progress.toFixed(1);
@@ -31,6 +32,8 @@ export default function Page() {
     const [uploadProgress, setUploadProgress] = useState<number>(0);
     
     useAuthRedirect("/");
+
+    const router = useRouter();
 
     const startFileUpload = (file: File | undefined) => {
         if (file == null) return;
@@ -59,10 +62,10 @@ export default function Page() {
         .then(res => res.data)
         .then((res: UploadAPIResponse) => {
             if (!res.success) return Promise.reject({message: res.errorMessage});
-            //redirect("/myfiles/" + res.fileToken);
+
+            router.push(`/details/${res.fileToken}`);
         })
         .catch(e => {
-            console.log(e + "huj");
             setUploadState("error");
             setUploadError(e);
         })

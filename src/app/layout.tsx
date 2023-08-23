@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter as MainFont } from 'next/font/google'
+import { Open_Sans as MainFont } from 'next/font/google'
 import ActiveLink from '@/components/activeLink'
 import { getServerSession } from 'next-auth/next'
 
@@ -11,7 +11,7 @@ import authOptions from '@/globals/authOptions'
 import classNames from 'classnames'
 
 
-const mainFont = MainFont({ subsets: ['latin'] })
+const mainFont = MainFont({ weight: "400" , subsets: ['latin'] })
 
 export const metadata: Metadata = {
 	title: 'Imshare (nextJS)',
