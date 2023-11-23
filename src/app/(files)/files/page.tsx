@@ -39,7 +39,7 @@ export default function Page() {
         <div className="card transition !max-w-none !w-auto">
             <RefreshPage />
             <span className="text-2xl font-medium mx-auto mb-8">Uploaded files</span>
-            <span className={classNames("text-sm text-red-400 transition-all", { "opacity-0 h-0": pageState.success })}>
+            <span className={classNames("text-sm text-red-400 transition-all", { "opacity-0 h-0": pageState.success ?? true })}>
                 <b>Error:</b> {pageState.errorMessage ?? ""}
             </span>
 

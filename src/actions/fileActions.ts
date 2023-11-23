@@ -34,7 +34,7 @@ export async function uploadFile(form: FormData): Promise<UploadAPIResponse> {
         return apiError("`file` was null");
     }
 
-    if (file.size >= MAX_FILE_SIZE) return apiError("File size too big!");
+    if (file.size >= MAX_FILE_SIZE) return apiError("File size too big");
 
     const token = generateToken(TOKEN_SIZE);
     const buf = Buffer.from(await file.arrayBuffer());
@@ -69,6 +69,8 @@ export async function uploadFile(form: FormData): Promise<UploadAPIResponse> {
 
 export async function getUserFiles(): Promise<GetFilesAPIResponse> {
     const session = await getServerSession(authOptions);
+
+    if (!session) return apiError("Unauthorized");
 
     const files: ClientFile[] = await prisma.sharedFile.findMany({
         where: {

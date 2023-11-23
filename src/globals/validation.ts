@@ -3,7 +3,6 @@ class StringValidator {
     private _errors: string[] = [];
     private _displayName: string | undefined;
 
-
     public constructor(target: string) {
         this._target = target;
     }
@@ -15,8 +14,6 @@ class StringValidator {
 
         return this;
     }
-
-
 
     public displayName(name: string) {
         this._displayName = name;
@@ -38,7 +35,6 @@ class StringValidator {
     public str() {
         return this._target;
     }
-
 
     public trim() {
         this._target = this._target.trim();

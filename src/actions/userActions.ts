@@ -7,8 +7,6 @@ import { createHash } from "@/globals/hash";
 import { ObjectStringValidator } from "@/globals/validation";
 import { APIResponse, GetFilesAPIResponse, apiError } from "@/types/apiResponse";
 import { CreateUserOptions } from "@/types/user";
-import { ClientFile } from "@/types/file";
-import { unstable_cache } from "next/cache";
 
 export async function createUser(userOptions: CreateUserOptions): Promise<APIResponse> {
     const validator = new ObjectStringValidator(userOptions);
@@ -16,7 +14,7 @@ export async function createUser(userOptions: CreateUserOptions): Promise<APIRes
     validator
         .field("username").displayName("Username").min(6).max(16).alphanumericUnderscore().end()
         .field("password").displayName("Password").min(8).end()
-        .field("passwordRepeat").displayName("Repeat password").matchesString(userOptions.username).end()
+        .field("passwordRepeat").displayName("Repeat password").matchesString(userOptions.password).end()
         .field("email").displayName("E-mail").email().end();
 
     if (!validator.valid()) {
