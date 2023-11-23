@@ -9,3 +9,5 @@ export async function POST(request: Request) {
 
     return NextResponse.json(await uploadFile(form));
 }
+
+export const dynamic = "force-dynamic";
