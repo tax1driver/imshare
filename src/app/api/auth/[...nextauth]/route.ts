@@ -6,4 +6,3 @@ const nextAuth = NextAuth(authOptions);
 
 export { nextAuth as GET, nextAuth as POST };
 
-export const dynamic = "force-dynamic";

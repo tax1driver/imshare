@@ -22,7 +22,7 @@ export default async function RootLayout({
 }: {
   	children: React.ReactNode
 }) {
-	const authorized = getServerSession(authOptions);
+	const authorized = await getServerSession(authOptions);
 	
 
 	return (
