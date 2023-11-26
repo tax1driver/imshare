@@ -1,3 +1,5 @@
+"use client";
+
 import type { Metadata } from 'next'
 import { Open_Sans as MainFont } from 'next/font/google'
 import ActiveLink from '@/components/activeLink'
@@ -23,7 +25,7 @@ export default async function RootLayout({
 }: {
   	children: React.ReactNode
 }) {
-	const authorized = await getServerSession(authOptions);
+	const authorized = await getSession(authOptions);
 	
 
 	return (
