@@ -8,7 +8,11 @@ import { ObjectStringValidator } from "@/globals/validation";
 import { APIResponse, GetFilesAPIResponse, apiError } from "@/types/apiResponse";
 import { CreateUserOptions } from "@/types/user";
 
-export async function createUser(userOptions: CreateUserOptions): Promise<APIResponse> {
+export async function createUser(username: string, password: string, passwordRepeat: string, email: string): Promise<APIResponse> {
+    const userOptions: CreateUserOptions = {
+        username, password, passwordRepeat, email
+    };
+    
     const validator = new ObjectStringValidator(userOptions);
     
     validator
