@@ -2,7 +2,8 @@
 const nextConfig = {
     experimental: {
         serverActions: true
-    }
+    },
+    basePath: "/demos/ims"
 }
 
 module.exports = nextConfig
