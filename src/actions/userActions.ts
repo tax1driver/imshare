@@ -49,6 +49,7 @@ export async function createUser(userOptions: CreateUserOptions): Promise<APIRes
             }
         });
     } catch(e) {
+        console.log(e);
         return {
             success: false,
             errorMessage: ["Internal server error", e]
