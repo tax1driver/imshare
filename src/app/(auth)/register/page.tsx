@@ -21,7 +21,7 @@ export default function Page() {
             email: e.target["email"].value
         };
 
-        createUser(userOptions.username, userOptions.password, userOptions.passwordRepeat, userOptions.email)
+        createUser(userOptions)
         .then(response => {
             if (!response.success) {
                 setErrors(response.errorMessage);
