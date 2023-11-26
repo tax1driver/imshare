@@ -9,6 +9,7 @@ import Link from 'next/link'
 import AccountSection from '@/components/accountSection'
 import authOptions from '@/globals/authOptions'
 import classNames from 'classnames'
+import { SessionProvider } from 'next-auth/react'
 
 
 const mainFont = MainFont({ weight: "400" , subsets: ['latin'] })
@@ -26,6 +27,7 @@ export default async function RootLayout({
 	
 
 	return (
+		<SessionProvider session={authorized} basePath="/demos/ims/api/auth">
 		<html lang="en">
 			<body className={mainFont.className + " min-h-screen"}>
 				<header className="p-12 flex">
@@ -54,6 +56,7 @@ export default async function RootLayout({
 					<Link href="/privacy" className="hover:text-slate-200 transition">Privacy policy</Link>		
 				</footer>
 			</body>
-		</html>	
+		</html>
+		</SessionProvider>	
 	)
 }
